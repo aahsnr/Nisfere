@@ -1,0 +1,61 @@
+#network-menu-header {
+    font-weight: bold;
+    color: var(--selected);
+}
+
+#network-menu-header-box>button>label {
+    font-size: 20px;
+    color: var(--selected)
+}
+
+#ethernet-menu>label{
+    color: var(--selected);
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#ethernet-summary-status{
+    font-size: 14px;
+    font-weight: bold;
+}
+#ethernet-summary-speed{
+    font-size: 14px;
+}
+
+#wifi-menu-header{
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--selected);
+}
+
+#wifi-menu-header-buttons>button>label{
+    color: var(--selected);
+    font-size: 20px;
+}
+
+#wifi-password{
+    margin: -10px;
+    padding: 13px;
+    background-color: var(--background);
+}
+#wifi-password>label{
+    font-size: 14px;
+}
+
+#wifi-menu-password{
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+#wifi-menu-password-entry {
+    background-color: var(--module-bg);  /* Dark background */
+    color: var(--foreground);             /* White text */
+    border-radius: 5px;         /* Rounded corners */
+    border: 1px solid var(--foreground);  /* Blue border */
+    padding: 5px;               /* Padding inside */
+    font-size: 12px;
+}
+
+#wifi-menu-password-entry:focus {
+    border: 1px solid var(--selected);  /* Light blue when focused */
+}

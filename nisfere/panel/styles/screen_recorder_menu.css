@@ -1,0 +1,27 @@
+#screen-recorder-menu-header {
+    color: var(--selected);
+    font-weight: bold;
+}
+
+#screen-recorder-menu-footer {
+    color: var(--foreground);
+    font-size: 12px;
+    font-weight:bold;
+}
+
+#screen-recorder-menu-body>button {
+    background-color: var(--window-bg);
+}
+
+#screen-recorder-menu-body>button:hover {
+    background-color: var(--selected);
+}
+
+#screen-recorder-menu-body>button:hover label {
+    color: var(--window-bg);
+}
+
+#screen-recorder-menu-body>button>label {
+    font-size: 18px;
+    color: var(--selected)
+}

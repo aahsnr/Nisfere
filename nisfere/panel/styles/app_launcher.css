@@ -1,0 +1,53 @@
+#app-launcher-scroll-bar button {
+    background: transparent;
+    border: none;
+}
+
+#app-launcher-entry {
+    padding: 5px;
+    background-color: var(--module-bg);
+}
+
+#app-launcher-button>*{
+    /* background-color: var(--window-bg); */
+    padding: 8px;
+}
+
+#app-launcher-button:hover *{
+    background-color: var(--selected);
+}
+
+#app-launcher-button:hover label{
+    color: var(--window-bg);
+}
+
+/* Button when focused */
+#app-launcher-button:focus {
+    background-color: var(--selected);
+}
+
+#app-launcher-button:focus label {
+    color: var(--window-bg);
+}
+
+#app-launcher-scroll-bar {
+    background-color: var(--module-bg);
+    padding: 13px;
+}
+
+#app-launcher-icon{
+    color: var(--selected);
+    background-color: var(--module-bg);
+    font-size: 20px;
+    padding: 5px;
+}
+
+#app-launcher-close{
+    background-color: var(--module-bg);
+    padding: 5px;
+}
+
+#app-launcher-close label{
+    color: var(--color1);
+    font-size: 20px;
+}

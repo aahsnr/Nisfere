@@ -1,0 +1,135 @@
+.side-panel-widget {
+    background-color: var(--module-bg);
+    padding: 13px;
+}
+
+#side-panel-box{
+    min-width: 250px;
+}
+
+#side-panel-box button:hover {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+#user-header-label {
+    color: var(--selected);
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#panel-date-time>label {
+    font-weight: 900;
+    font-size: 20px;
+}
+
+#power-buttons>button>label {
+    color: var(--window-bg);
+    font-size: 18px;
+}
+
+#power-button-0 {
+    background-color: var(--color1)
+}
+
+#power-button-1 {
+    background-color: var(--color2)
+}
+
+#power-button-2 {
+    background-color: var(--color3)
+}
+
+#power-button-3 {
+    background-color: var(--color5)
+}
+#power-button-4 {
+    background-color: var(--color6)
+}
+
+
+#apps-grid>button>label {
+    color: var(--window-bg);
+    font-size: 18px;
+}
+
+#apps-grid>button {
+    background-color: var(--selected);
+    padding: 5px;
+}
+
+#launcher-apps-grid>button>label {
+    color: var(--window-bg);
+    font-size: 18px;
+}
+
+#launcher-apps-grid>button {
+    background-color: var(--selected);
+    padding: 5px;
+}
+
+#folders-grid>button {
+    padding: 5px;
+}
+
+#folders-grid>button .icon-button-label {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#folder-0 .icon-button>label {
+    color: var(--color1)
+}
+
+#folder-1 .icon-button>label {
+    color: var(--color2)
+}
+
+#folder-2 .icon-button>label {
+    color: var(--color3)
+}
+
+#folder-3 .icon-button>label {
+    color: var(--color4)
+}
+
+#folder-4 .icon-button>label{
+    color: var(--color5)
+}
+
+#folder-5 .icon-button>label{
+    color: var(--color6)
+}
+
+#cpu-progress-bar {
+    color: var(--window-bg);
+    background-color: transparent;
+    border: solid 8px var(--color1);
+}
+
+.cpu-progress-icon {
+    color: var(--color1);
+    font-size: 18px;
+}
+
+#ram-progress-bar {
+    color: var(--window-bg);
+    background-color: transparent;
+    border: solid 8px var(--color3);
+}
+
+.ram-progress-icon {
+    color: var(--color3);
+    font-size: 18px;
+}
+
+#disk-progress-bar {
+    color: var(--window-bg);
+    background-color: transparent;
+    border: solid 8px var(--color2);
+}
+
+.disk-progress-icon {
+    color: var(--color2);
+    font-size: 22px;
+}

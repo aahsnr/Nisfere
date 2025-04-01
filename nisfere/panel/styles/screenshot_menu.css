@@ -1,0 +1,27 @@
+#screenshot-menu-header {
+    color: var(--selected);
+    font-weight: bold;
+}
+
+#screenshot-menu-footer {
+    color: var(--foreground);
+    font-size: 12px;
+    font-weight:bold;
+}
+
+#screenshot-menu-body>button {
+    background-color: var(--window-bg);
+}
+
+#screenshot-menu-body>button:hover {
+    background-color: var(--selected);
+}
+
+#screenshot-menu-body>button:hover label {
+    color: var(--window-bg);
+}
+
+#screenshot-menu-body>button>label {
+    font-size: 18px;
+    color: var(--selected)
+}

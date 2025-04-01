@@ -1,0 +1,30 @@
+
+#notification-popup {
+    padding: 13px;
+    min-width: 260px;
+}
+
+#notification-popup-summary{
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#notification-popup-body{
+    font-size: 12px;
+}
+
+#notification-popup-close>label{
+    color: var(--color1);
+    font-size: 20px;
+}
+
+#notification-popup-actions>button{
+    background-color: var(--selected);
+    padding: 4px;
+}
+
+#notification-popup-actions>button>label {
+    color: var(--window-bg);
+    font-size: 12px;
+    font-weight: bold;
+}

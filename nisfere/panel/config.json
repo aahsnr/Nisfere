@@ -1,0 +1,62 @@
+{   
+    "default_config": {
+        "screenshots_folder": "~/Pictures/screenshots",
+        "screen_records_folder": "~/Videos/records",
+        "user_picture_path": "~/Pictures/user",
+        "system_lock_app": "swaylock"
+    },
+    "bar": {
+        "position": "top",
+        "widgets": {
+            "left": [
+                "side_panel_button",
+                "workspaces",
+                "active_window"
+            ],
+            "center": [
+                "media_player"
+            ],
+            "right": [
+                "volume",
+                "date_time",
+                "language",
+                "system_tray",
+                "power"
+            ]
+        }
+    },
+    "dock": {
+        "use": true,
+        "pinned_apps": [
+            "spotify",
+            "firefox",
+            "alacritty"
+        ],
+        "position": "bottom"
+    },
+    "system_tray": {
+        "widgets": [
+            "bluetooth",
+            "network",
+            "notifications",
+            "stop_recording"
+        ]
+    },
+    "side_panel":{
+        "apps": [
+            "firefox",
+            "spotify",
+            "alacritty",
+            "code-oss"   
+        ],
+
+        "folders": [
+            "Downloads",
+            "Documents",
+            "Pictures",
+            "Videos",
+            "Music",
+            "projects"
+        ]
+    }
+}

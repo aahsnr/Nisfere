@@ -1,0 +1,27 @@
+#power-menu-header {
+    color: var(--color1);
+    font-weight: bold;
+}
+
+#power-menu-footer {
+    color: var(--foreground);
+    font-size: 12px;
+    font-weight:bold;
+}
+
+#power-menu-body>button {
+    background-color: var(--window-bg);
+}
+
+#power-menu-body>button:hover {
+    background-color: var(--color1);
+}
+
+#power-menu-body>button:hover label {
+    color: var(--window-bg);
+}
+
+#power-menu-body>button>label {
+    font-size: 18px;
+    color: var(--color1)
+}

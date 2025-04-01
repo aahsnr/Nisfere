@@ -1,0 +1,37 @@
+#media-player-menu {
+    min-width: 300px;
+}
+#track-title{
+    font-weight: bold;
+    color: var(--color2);
+}
+
+#track-artist {
+    font-size: 14px;
+    color: var(--foreground);
+}
+
+#track-duration,
+#track-position {
+    font-size: 12px;
+    color: var(--foreground);
+}
+
+#media-player-menu-buttons>button>label{
+    background-color: var(--window-bg);
+    color: var(--color2);
+    padding: 2px;
+}
+
+#media-player-menu-buttons>button:hover label {
+    background-color: var(--color2);
+    color: var(--window-bg);
+}
+
+#track-position-scale {
+    min-width: 140px;
+}
+
+#track-position-scale trough highlight, trough progress {
+    background-color: var(--color2);
+}

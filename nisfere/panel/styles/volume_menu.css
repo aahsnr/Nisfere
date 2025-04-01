@@ -1,0 +1,39 @@
+#volume-menu-header {
+    color: var(--color2);
+    font-weight: bold;
+}
+
+#volume-menu-body>box>label {
+    font-size: 11px;
+}
+
+#volume-menu-body>box>box>button {
+    background-color: var(--window-bg);
+    min-width: 40px;
+}
+
+#volume-menu-body>box>box>button>label {
+    color: var(--color2);
+    font-size: 14px;
+}
+
+#volume-menu-body>box>box>button:hover {
+    background-color: var(--color2);
+}
+
+#volume-menu-body>box>box>button:hover label{
+    color: var(--window-bg);
+
+}
+
+#volume-menu-body>box>box>label {
+    font-size:14px;
+}
+
+#microphone-scale trough highlight, trough progress {
+    background-color: var(--color2);
+}
+
+#speaker-scale trough highlight, trough progress {
+    background-color: var(--color2);
+}

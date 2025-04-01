@@ -1,0 +1,36 @@
+#theme-switcher-menu-header {
+    color: var(--selected);
+    font-weight: bold;
+}
+
+#theme-switcher-menu-theme-button{
+    padding: 3px;
+}
+#theme-switcher-menu-theme-button:hover{
+    background-color: var(--selected);
+}
+
+#theme-switcher-menu-theme-button:hover label {
+    color: var(--window-bg);
+}
+
+#theme-switcher-menu-apply-button {
+    padding: 5px;
+    background-color: var(--window-bg);
+}
+
+#theme-switcher-menu-apply-button:hover {
+    background-color: var(--selected);
+}
+
+#theme-switcher-menu-color-box {
+    border: 1px solid var(--foreground);
+}
+
+#theme-switcher-menu-hex-label{
+    text-shadow: 1px 1px var(--window-bg);
+}
+
+#theme-switcher-menu-color-name-label{
+    font-size: 14px;
+}

@@ -1,0 +1,13 @@
+#notifications-menu-header {
+    color: var(--selected);
+    font-weight: bold;
+}
+
+#notifications-menu-header-box>button>label {
+    font-size: 20px;
+    color: var(--selected)
+}
+
+#notifications-menu-body{
+    min-height: 400px;
+}

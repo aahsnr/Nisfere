@@ -1,0 +1,87 @@
+* {
+    all: unset;
+    color: var(--foreground);
+    font-size: 16px;
+    font-family: "ArimoNerdFont";
+    border-radius: 6px;
+}
+
+.menu-inner {
+    background-color: var(--module-bg);
+    padding: 13px;
+    min-width: 250px;
+}
+
+.menu {
+    background-color: var(--window-bg);
+    padding: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.active {
+    color: var(--selected);
+    border: 1px solid var(--selected);
+}
+
+.show-dock {
+    opacity: 1;
+}
+
+.hide-dock {
+    opacity: 0;
+}
+
+.scale trough {
+    border-radius: 6px;
+    background-color: var(--window-bg);
+    min-height: 12px;
+    min-width: 12px;
+}
+
+.scale trough highlight, trough progress {
+    border-radius: 4px;
+    background-color: var(--selected);
+    min-height: 12px;
+    min-width: 12px;
+}
+
+.scale slider {
+    background-color: var(--foreground);
+    border-radius: 6px;
+    min-height: 16px;
+    min-width: 16px;
+    margin: -0.5em;
+}
+
+.scrollbar scrollbar {
+    border-radius: 10px;
+    background-color: var(--background);
+    padding: 2px;
+    margin-left: 6px;
+    margin-right: -2px;
+}
+
+.scrollbar slider {
+    border-radius: 8px;
+    min-width: 10px;
+    min-height: 10px;
+    background-color: var(--selected);
+}
+
+.scrollbar slider:hover {
+    background-color: var(--foreground);
+}
+
+tooltip {
+    border: 1px solid var(--border-color);
+    background-color: var(--window-bg);
+    /* font-weight: lighter; */
+}
+
+tooltip>* {
+    padding: 2px 4px;
+}
+
+tooltip>box>label{
+    font-size: 12px;
+}

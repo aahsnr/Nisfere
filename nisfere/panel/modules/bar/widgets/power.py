@@ -1,0 +1,22 @@
+
+from fabric.widgets.label import Label
+from fabric.widgets.wayland import WaylandWindow as Window
+
+from shared import Button, PopOverWindow
+from widgets import PowerMenu
+from utils.icons import power as power_icons
+
+class Power(Button):
+    def __init__(self,bar, **kwargs):
+        super().__init__(name= "power", style_classes= "bar-widget", **kwargs)
+        
+        self.popup = PopOverWindow(
+            parent= bar,
+            pointing_to= self,
+            child= PowerMenu()
+        )
+       
+        self.set_label(power_icons)
+
+        self.connect("clicked", lambda *args: self.popup.set_visible(not self.popup.get_visible()))
+

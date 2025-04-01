@@ -1,0 +1,30 @@
+#brightness-menu-header {
+    color: var(--color6);
+    font-weight: bold;
+}
+
+#brightness-menu-footer {
+    color: var(--foreground);
+    font-size: 12px;
+    font-weight:bold;
+}
+
+#brightness-menu-body>button {
+    background-color: var(--window-bg);
+}
+
+#brightness-menu-body>button:hover {
+    background-color: var(--color6);
+}
+
+#brightness-menu-body>button:hover label {
+    color: var(--window-bg);
+}
+
+#brightness-menu-body>button>label {
+    font-size: 18px;
+    color: var(--color6)
+}
+#brightness-menu-scale trough highlight, trough progress {
+    background-color: var(--color6);
+}

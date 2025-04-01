@@ -1,0 +1,21 @@
+#bluetooth-menu-header{
+    font-weight: bold;
+    color: var(--selected);
+}
+
+#bluetooth-menu-header-box>button>label{
+    color: var(--selected);
+    font-size: 20px;
+}
+
+#bluetooth-menu-paired-header{
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--selected);
+}
+
+#bluetooth-menu-available-header {
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--selected);
+}
