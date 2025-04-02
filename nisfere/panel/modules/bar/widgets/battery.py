@@ -34,6 +34,7 @@ class Battery(ButtonWithIcon):
                       self.battery.state == "CHARGING"))
         self.set_tooltip_text(self.battery.time_to_full if self.battery.state ==
                               "CHARGING" else self.battery.time_to_empty)
+
         self.icon_label.add_style_class(
             'low') if self.battery.percentage <= 20 else self.icon_label.remove_style_class('low')
         self.text_label.add_style_class(
