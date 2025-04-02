@@ -50,6 +50,7 @@ install_packages() {
 	# Install pacman packages 
 	pacman_deps=(
 		fastfetch
+		bpytop
 		pipewire
 		playerctl
 		networkmanager
