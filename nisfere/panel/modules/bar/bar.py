@@ -14,7 +14,7 @@ BAR_WIDGETS_MAPPING = {
     "workspaces": Workspaces,
     "active_window": ActiveWindow,
     "media_player": MediaPlayer,
-    "brigthness": Brightness,
+    "brightness": Brightness,
     "volume": Volume,
     "date_time": DateTime,
     "language": Language,

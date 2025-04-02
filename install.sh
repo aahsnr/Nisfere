@@ -22,6 +22,28 @@ if [ "$(id -u)" -eq 0 ]; then
 	exit 1
 fi
 
+# install yay if needed
+installYay() {
+    _installPackages "base-devel"
+    SCRIPT=$(realpath "$0")
+    temp_path=$(dirname "$SCRIPT")
+    git clone https://aur.archlinux.org/yay.git $download_folder/yay
+    cd $download_folder/yay
+    makepkg -si
+    cd $temp_path
+    echo ":: yay has been installed successfully."
+}
+
+# Check if command exists
+checkCommandExists() {
+    package="$1"
+    if ! command -v $package >/dev/null; then
+        return 1
+    else
+        return 0
+    fi
+}
+
 install_packages() {
 	echo "Installing the pre-requisites, may take a while...."
 
@@ -34,11 +56,13 @@ install_packages() {
 		brightnessctl
 		pkgconf
 		wf-recorder
-        thunar
-        thunar-archive-plugin
-        zip
-        unzip
-        gvfs
+		thunar
+		thunar-archive-plugin
+		xarchiver
+		zip
+		unzip
+		gvfs
+		swww
 		alacritty
 		libnotify
 		python
@@ -53,11 +77,11 @@ install_packages() {
 		python-psutil
 		python-cairo
 		python-dbus
-        python-pydbus
+        	python-pydbus
 		python-loguru
 		python-setproctitle
-        grim
-        swappy
+        	grim
+        	swappy
 	)
 
 	aur_deps=(
@@ -73,26 +97,23 @@ install_packages() {
 
 	sudo pacman -S --noconfirm --needed "${pacman_deps[@]}"  || true
 
-	if command -v yay &>/dev/null; then
-		aur_helper="yay"
-	elif command -v paru &>/dev/null; then
-		aur_helper="paru"
-	else
-		echo -e "yay or paru not found."
-		exit 1
-	fi
-
-	if command -v paru &>/dev/null; then
-		aur_helper="paru"
-	else
-		aur_helper="yay"
-	fi
-
 	# Install aur packages
 
-	$aur_helper -S --noconfirm --needed "${aur_deps[@]}"  || true
+	yay --noconfirm --needed "${aur_deps[@]}"  || true
 
 }
+
+# Synchronizing package databases
+echo "Updating Arch..."
+sudo pacman -Sy
+
+# Install yay if needed
+if checkCommandExists "yay"; then
+    echo "yay is already installed"
+else
+    echo "The installer requires yay. yay will be installed now"
+    installYay
+fi
 
 install_packages
 
