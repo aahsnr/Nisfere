@@ -122,7 +122,7 @@ class ThemeSwitcherMenu(Box):
 
             # Move to next column, wrap to new row if needed
             col += 1
-            if col >= 5:
+            if col >= 4:
                 col = 0
                 row += 1
 

@@ -90,6 +90,9 @@ copy_files() {
     cp -r "$script_dir/dotfiles/"* "$HOME/.config/"
     echo '[]' > "$HOME/.cache/nisfere/notifications.json"
     
+    mkdir -p "$HOME/.config/nisfere/themes"
+    cp "$script_dir/nisfere/panel/config.json" "$HOME/.config/nisfere/panel-config.json"
+    
     echo -e "${green}✔ Configuration files copied.${reset}"
 }
 
@@ -99,7 +102,24 @@ setup_icons_and_cursor() {
     if [ ! -d "$icons_dest/dracula-icons" ]; then
         git clone https://github.com/m4thewz/dracula-icons "$icons_dest/dracula-icons"
     fi
+    if [ ! -d "$icons_dest/Zafiro-Nord-Dark" ]; then
+        git clone https://github.com/zayronxio/Zafiro-Nord-Dark.git "$icons_dest/Zafiro-Nord-Dark"
+    fi
     
+    if [ ! -d "$icons_dest/Catppuccin-Mocha" ]; then
+        temp_dir=$(mktemp -d)
+        git clone https://github.com/Fausto-Korpsvart/Catppuccin-GTK-Theme.git "$temp_dir"
+        cp -r "$temp_dir/icons/Catppuccin-Mocha" "$icons_dest/"
+        rm -rf "$temp_dir"
+    fi
+
+    if [ ! -d "$icons_dest/Solarized-Deluxe-Iconpack" ]; then
+        temp_dir=$(mktemp -d)
+         git clone --branch Solarized-Deluxe-Icons-and-Animated-Cursors --single-branch https://github.com/rtlewis88/rtl88-Themes.git "$temp_dir"
+        cp -r "$temp_dir/Solarized-Deluxe-Iconpack" "$icons_dest/"
+        rm -rf "$temp_dir"
+    fi
+
     if [ ! -d "$icons_dest/Grade-circle-dark" ]; then
         temp_dir=$(mktemp -d)
         git clone https://github.com/mayur-m-zambare/Grade-icon-theme.git "$temp_dir"
