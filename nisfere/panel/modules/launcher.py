@@ -17,10 +17,7 @@ class Launcher(Window):
             **kwargs,
         )
 
-        self.calendar = Calendar()
-        self.volume_menu = VolumeMenu()
         self.power_menu = PowerMenu()
-        self.notifications_menu = NotificationsMenu()
         self.app_launcher = AppLauncher().build()\
             .connect('closed', lambda *args: self.close())\
             .unwrap()
@@ -35,13 +32,9 @@ class Launcher(Window):
 
 
         self.widgets = {
-            "calendar": self.calendar,
             "app_launcher": self.app_launcher,
-            "volume_menu": self.volume_menu,
-            "power_menu": self.power_menu,
             "screenshot_menu": self.screenshot_menu,
             "screen_recorder_menu": self.screen_recorder_menu,
-            "notifications_menu": self.notifications_menu,
             "theme_switcher_menu": self.theme_switcher_menu,
         }
 
