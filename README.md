@@ -36,6 +36,56 @@ Nisfere is a setup script and dotfiles collection tailored for Arch Linux users.
 
 ---
 
+## ⚙️ Configuration
+
+After installation, Nisfere stores its configuration in the following directory:
+```
+~/.config/nisfere
+```
+
+
+### 🎨 Custom Themes
+
+To create your own themes, navigate to:
+
+```
+~/.config/nisfere/themes/
+```
+
+Inside this folder, you can add a subfolder for each custom theme (e.g., `dracula`, `nord`, `gruvbox`, etc.). Each theme folder should contain the following files:
+
+| File Name        | Description                                      |
+|------------------|--------------------------------------------------|
+| `colors.sh`      | Shell script that defines theme color variables. |
+| `wallpapers.pdf` | The wallpaper to be used for the theme.          |
+| `icon.txt`       | A text file containing the desired icon theme.   |
+
+**Example directory structure:**
+
+```
+~/.config/nisfere/themes/dracula/ ├── colors.sh ├── wallpapers.pdf └── icon.txt
+```
+
+> 🔁 You can switch themes using the `change-theme.sh` script found in the `~/.nisfere/scripts/` directory.
+
+---
+
+### 📌 Panel Configuration
+
+The panel is controlled via a JSON config file located at:
+
+```
+~/.config/nisfere/panel-config.json
+```
+
+This file lets you customize:
+- Default settings
+- Bar settings
+- Dock settings
+- Font size & family & border
+
+---
+
 ## 📦 What gets installed?
 
 ### Pacman Packages
