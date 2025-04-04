@@ -36,6 +36,23 @@ Nisfere is a setup script and dotfiles collection tailored for Arch Linux users.
 
 ---
 
+## 🔧 Installation
+
+```bash
+# Clone this repository
+git clone https://github.com/yourusername/nisfere-dotfiles.git
+cd nisfere-dotfiles
+
+# Make the install script executable
+chmod +x install.sh
+
+# Run the installer (do NOT use sudo)
+./install.sh
+```
+
+---
+
+
 ## ⚙️ Configuration
 
 After installation, Nisfere stores its configuration in the following directory:
@@ -128,21 +145,6 @@ Panel config is stored in:
 
 ---
 
-## 🔧 Installation
-
-```bash
-# Clone this repository
-git clone https://github.com/yourusername/nisfere-dotfiles.git
-cd nisfere-dotfiles
-
-# Make the install script executable
-chmod +x install.sh
-
-# Run the installer (do NOT use sudo)
-./install.sh
-```
-
----
 
 ## ❌ Uninstallation
 
