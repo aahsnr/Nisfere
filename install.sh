@@ -142,7 +142,9 @@ setup_icons_and_cursor() {
     hyprctl setcursor "Breeze-Adapta-Cursor" 17
     gsettings set org.gnome.desktop.interface cursor-theme "Breeze-Adapta-Cursor"
     gsettings set org.gnome.desktop.interface cursor-size 17
-    sed -i '/{/a \  "workbench.colorTheme": "Nisfere",' ~/.config/Code\ -\ OSS/User/settings.json
+    if [ -d "$HOME/.config/Code - OSS/User/settings.json" ]; then
+        sed -i '/{/a \  "workbench.colorTheme": "Nisfere",' "$HOME/.config/Code - OSS/User/settings.json"
+    fi
     echo -e "${green}✔ Icons and cursor setup complete.${reset}"
 }
 
