@@ -6,6 +6,22 @@ Nisfere is a setup script and dotfiles collection tailored for Arch Linux users.
 
 ---
 
+## ✨ Preview
+
+
+<p align="center">
+  <img src="screenshots/dracula.png" alt="Dracula" width="30%" style="margin: 5px;"/>
+  <img src="screenshots/tokyo-night.png" alt="Tokyo Night" width="30%" style="margin: 5px;"/>
+  <img src="screenshots/nord.png" alt="Nord" width="30%" style="margin: 5px;"/>
+</p>
+
+<p align="center">
+  <img src="screenshots/catppuccin-mocha.png" alt="Catppuccin Mocha" width="45%" style="margin: 5px;"/>
+  <img src="screenshots/solarized.png" alt="Solarized" width="45%" style="margin: 5px;"/>
+</p>
+
+---
+
 ## 🔧 Requirements
 - Arch Linux
 - Internet connection
