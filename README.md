@@ -101,7 +101,7 @@ This file lets you customize:
 Essential utilities and dependencies for the Nisfere setup:
 
 ```
-fastfetch, bpytop, pipewire, playerctl, networkmanager, brightnessctl, 
+fastfetch, bpytop ,vscode, pipewire, playerctl, networkmanager, brightnessctl, 
 pkgconf, wf-recorder, thunar, thunar-archive-plugin, xarchiver, zip, unzip, 
 gvfs, swww, zsh, alacritty, libnotify, python, gtk3, cairo, gtk-layer-shell, 
 libgirepository, gobject-introspection, gobject-introspection-runtime, 
@@ -133,26 +133,6 @@ Nisfere's panel is powered by [Fabric](https://github.com/Fabric-Development/fab
 Panel config is stored in:
 ```
 ~/.config/nisfere/panel-config.json
-```
-
----
-
-
-## ❌ Uninstallation
-
-There is no automated uninstall script yet, but you can manually remove installed content:
-
-```bash
-# Delete nisfere content
-rm -rf ~/.nisfere
-rm -rf ~/.config/nisfere
-rm -rf ~/.fonts/*
-rm -rf ~/.themes/*
-rm -rf ~/.icons/*
-rm -rf ~/.zshrc
-
-# (Optional) Reset shell to bash
-chsh -s /bin/bash
 ```
 
 ---
