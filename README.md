@@ -62,6 +62,42 @@ Panel config is stored in:
 
 ---
 
+## 🔧 Installation
+
+```bash
+# Clone this repository
+git clone https://github.com/yourusername/nisfere-dotfiles.git
+cd nisfere-dotfiles
+
+# Make the install script executable
+chmod +x install.sh
+
+# Run the installer (do NOT use sudo)
+./install.sh
+```
+
+---
+
+## ❌ Uninstallation
+
+There is no automated uninstall script yet, but you can manually remove installed content:
+
+```bash
+# Delete nisfere content
+rm -rf ~/.nisfere
+rm -rf ~/.config/nisfere
+rm -rf ~/.fonts/*
+rm -rf ~/.themes/*
+rm -rf ~/.icons/*
+rm -rf ~/.zshrc
+
+# (Optional) Reset shell to bash
+chsh -s /bin/bash
+```
+
+---
+
+
 ## ⌨️ Hyprland Default Keybindings
 
 ### General Actions
