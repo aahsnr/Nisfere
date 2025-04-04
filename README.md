@@ -101,7 +101,7 @@ This file lets you customize:
 Essential utilities and dependencies for the Nisfere setup:
 
 ```
-fastfetch, bpytop ,vscode, pipewire, playerctl, networkmanager, brightnessctl, 
+fastfetch, bpytop ,code, pipewire, playerctl, networkmanager, brightnessctl, 
 pkgconf, wf-recorder, thunar, thunar-archive-plugin, xarchiver, zip, unzip, 
 gvfs, swww, zsh, alacritty, libnotify, python, gtk3, cairo, gtk-layer-shell, 
 libgirepository, gobject-introspection, gobject-introspection-runtime, 

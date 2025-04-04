@@ -50,13 +50,45 @@ install_packages() {
         alacritty libnotify python gtk3 cairo gtk-layer-shell libgirepository \
         gobject-introspection gobject-introspection-runtime python-pip python-gobject \
         python-psutil python-cairo python-dbus python-pydbus python-loguru \
-        python-setproctitle grim swappy vscode
+        python-setproctitle grim swappy code
 
     yay -S --noconfirm --needed \
         python-fabric swaylock-effects-git swayidle gnome-bluetooth-3.0 fabric-cli-git slurp imagemagick
     
     echo -e "${green}✔ Packages installed.${reset}"
 }
+
+install_vscode_extension() {
+    echo "Configuring VSCode..."
+    
+    # Define the paths
+    vscode_extensions_dir="$HOME/.vscode-oss/extensions/"
+    vscode_settings_file="$HOME/.config/Code - OSS/User/settings.json"
+    
+    # Ensure the extensions directory exists
+    mkdir -p "$vscode_extensions_dir"
+    
+    # Copy the theme extension from the local folder
+    cp -r "$script_dir/vscode/"* "$vscode_extensions_dir"
+    
+    # Ensure the settings.json file exists
+    mkdir -p "$(dirname "$vscode_settings_file")"
+    if [ ! -f "$vscode_settings_file" ]; then
+        echo "{}" > "$vscode_settings_file"
+    fi
+    
+    # Safely add the theme to the settings.json if not already present
+    if ! grep -q '"workbench.colorTheme"' "$vscode_settings_file"; then
+        # If the setting does not exist, add it
+        sed -i '1s/{/{\n  "workbench.colorTheme": "Nisfere",/' "$vscode_settings_file"
+    else
+        # If it exists, update the theme (be more robust if needed)
+        sed -i 's/"workbench.colorTheme":.*$/  "workbench.colorTheme": "Nisfere",/' "$vscode_settings_file"
+    fi
+    
+    echo -e "${green}✔ VSCode configured with theme 'Nisfere'.${reset}"
+}
+
 
 install_zsh() {
     echo "Configuring Zsh..."
@@ -88,7 +120,6 @@ copy_files() {
     cp -r "$script_dir/fonts/"* "$HOME/.fonts/"
     cp -r "$script_dir/gtk-themes/"* "$HOME/.themes/"
     cp -r "$script_dir/dotfiles/"* "$HOME/.config/"
-    cp -r "$script_dir/vscode/"* "$HOME/.vscode-oss/extensions/"
     echo '[]' > "$HOME/.cache/nisfere/notifications.json"
     
     mkdir -p "$HOME/.config/nisfere/themes"
@@ -182,6 +213,7 @@ fi
 
 install_packages
 install_zsh
+install_vscode_extension
 copy_files
 setup_icons_and_cursor
 setup_nisfere

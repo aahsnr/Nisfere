@@ -48,7 +48,7 @@
 		"tab.unfocusedInactiveForeground": "{background}",
 		"input.background": "{background_alt}",
 		"input.foreground": "{foreground}",
-		"button.background": "{color1}",
+		"button.background": "{selected}",
 		"button.foreground": "{foreground}",
 		"editorGroupHeader.tabsBackground": "{background_alt}",
 		"editorGroup.dropBackground": "{backgound_alt}60",
@@ -64,7 +64,7 @@
 	"tokenColors": [
 		{
 			"settings": {
-				"foreground": "{color1}",
+				"foreground": "{selected}",
 				"background": "{background}"
 			}
 		},

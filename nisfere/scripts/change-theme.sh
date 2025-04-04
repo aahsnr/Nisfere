@@ -69,7 +69,6 @@ declare -A config_files=(
   ["$HOME/.themes/nisfere-gtk-theme/general/dark.css"]="$TEMPLATES_DIR/gtk.css"
   ["$HOME/.nisfere/panel/styles/colors.css"]="$TEMPLATES_DIR/panel-colors.css"
   ["$HOME/.config/bpytop/themes/nisfere.theme"]="$TEMPLATES_DIR/bpytop.theme"
-  ["$HOME/.config/Code - OSS/User/vscode-theme-temp.json"]="$TEMPLATES_DIR/vscode-theme.json"
   ["$HOME/.vscode-oss/extensions/nisfere/themes/Nisfere-color-theme.json"]="$TEMPLATES_DIR/vscode-theme.json"
 )
 
@@ -103,11 +102,6 @@ if [[ -f "$HYPRLAND_TEMPLATE_FILE" ]]; then
   echo "✅ Colors applied to Hyprland!"
 else
   echo "⚠️ Warning: Hyprland template file not found!"
-fi
-
-# Apply vscode theme
-if [ -d "$HOME/.config/Code - OSS/User/settings.json" ]; then
-    sed -i '/{/a \  "workbench.colorTheme": "Nisfere",' "$HOME/.config/Code - OSS/User/settings.json"
 fi
 
 # Apply GTK and icon theme
