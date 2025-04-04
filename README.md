@@ -6,6 +6,16 @@ Nisfere is a setup script and dotfiles collection tailored for Arch Linux users.
 
 ---
 
+## ✨ Preview
+
+<p align="center">
+  <img src="screenshots/dracula.png" alt="Nisfere Panel" width="600"/>
+  <br/>
+  <em>Dracula theme</em>
+</p>
+
+---
+
 ## 🔧 Requirements
 - Arch Linux
 - Internet connection
