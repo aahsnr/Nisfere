@@ -77,7 +77,7 @@ install_zsh() {
 		chmod 600 "$history_file"
 	fi
 
-    chsh -s /bin/zsh
+    sudo chsh -s /bin/zsh "$USER"
     echo -e "${green}✔ Zsh configured.${reset}"
 }
 
