@@ -50,7 +50,7 @@ install_packages() {
         alacritty libnotify python gtk3 cairo gtk-layer-shell libgirepository \
         gobject-introspection gobject-introspection-runtime python-pip python-gobject \
         python-psutil python-cairo python-dbus python-pydbus python-loguru \
-        python-setproctitle grim swappy
+        python-setproctitle grim swappy vscode
 
     yay -S --noconfirm --needed \
         python-fabric swaylock-effects-git swayidle gnome-bluetooth-3.0 fabric-cli-git slurp imagemagick
@@ -84,10 +84,11 @@ install_zsh() {
 copy_files() {
     echo "Copying configuration files..."
     
-    mkdir -p "$HOME/.fonts" "$HOME/.themes" "$HOME/.icons" "$HOME/.config" "$HOME/.cache/nisfere"
+    mkdir -p "$HOME/.fonts" "$HOME/.themes" "$HOME/.icons" "$HOME/.config" "$HOME/.cache/nisfere" "$HOME/.vscode-oss/extensions/" 
     cp -r "$script_dir/fonts/"* "$HOME/.fonts/"
     cp -r "$script_dir/gtk-themes/"* "$HOME/.themes/"
     cp -r "$script_dir/dotfiles/"* "$HOME/.config/"
+    cp -r "$script_dir/vscode/"* "$HOME/.vscode-oss/extensions/"
     echo '[]' > "$HOME/.cache/nisfere/notifications.json"
     
     mkdir -p "$HOME/.config/nisfere/themes"
@@ -141,6 +142,7 @@ setup_icons_and_cursor() {
     hyprctl setcursor "Breeze-Adapta-Cursor" 17
     gsettings set org.gnome.desktop.interface cursor-theme "Breeze-Adapta-Cursor"
     gsettings set org.gnome.desktop.interface cursor-size 17
+    sed -i '/{/a \  "workbench.colorTheme": "Nisfere",' ~/.config/Code\ -\ OSS/User/settings.json
     echo -e "${green}✔ Icons and cursor setup complete.${reset}"
 }
 
