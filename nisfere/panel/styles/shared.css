@@ -1,9 +1,9 @@
 * {
     all: unset;
     color: var(--foreground);
-    font-size: 16px;
-    font-family: "ArimoNerdFont";
-    border-radius: 6px;
+    font-size: apply(font-size);
+    font-family: apply(font-family);
+    border-radius: apply(border-radius);
 }
 
 .menu-inner {

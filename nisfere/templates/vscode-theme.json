@@ -51,14 +51,14 @@
 		"button.background": "{color1}",
 		"button.foreground": "{foreground}",
 		"editorGroupHeader.tabsBackground": "{background_alt}",
-		"editorGroup.dropBackground": "{color1}60",
+		"editorGroup.dropBackground": "{backgound_alt}60",
 		"textLink.activeForeground": "{color3}",
 		"textLink.foreground": "{selected}",
 		"list.activeSelectionBackground": "{selected}",
 		"list.focusBackground": "{selected}",
 		"list.hoverForeground": "{foreground}",
-		"list.hoverBackground": "{selected}30",
-		"list.dropBackground": "{selected}30"
+		"list.hoverBackground": "{selected}",
+		"list.dropBackground": "{selected}"
 
 	},
 	"tokenColors": [
@@ -76,7 +76,7 @@
 			],
 			"settings": {
 				"fontStyle": "italic",
-				"foreground": "{color2}"
+				"foreground": "{color7}"
 			}
 		},
 		{
@@ -86,7 +86,7 @@
 				"string constant.other.placeholder"
 			],
 			"settings": {
-				"foreground": "{color6}"
+				"foreground": "{color3}"
 			}
 		},
 		{
@@ -95,7 +95,7 @@
 				"constant.other.color"
 			],
 			"settings": {
-				"foreground": "{color5}"
+				"foreground": "{color2}"
 			}
 		},
 		{
@@ -105,7 +105,7 @@
 				"invalid.illegal"
 			],
 			"settings": {
-				"foreground": "{color9}"
+				"foreground": "{color1}"
 			}
 		},
 		{
@@ -147,7 +147,7 @@
 				"markup.deleted.git_gutter"
 			],
 			"settings": {
-				"foreground": "{color9}"
+				"foreground": "{color5}"
 			}
 		},
 		{
@@ -160,7 +160,7 @@
 				"keyword.other.special-method"
 			],
 			"settings": {
-				"foreground": "{color1}"
+				"foreground": "{color4}"
 			}
 		},
 		{
@@ -169,7 +169,7 @@
 				"meta.block variable.other"
 			],
 			"settings": {
-				"foreground": "{color9}"
+				"foreground": "{color5}"
 			}
 		},
 		{
@@ -179,7 +179,7 @@
 				"string.other.link"
 			],
 			"settings": {
-				"foreground": "{color9}"
+				"foreground": "{color5}"
 			}
 		},
 		{
@@ -195,7 +195,7 @@
 				"keyword.other"
 			],
 			"settings": {
-				"foreground": "{color3}"
+				"foreground": "{color2}"
 			}
 		},
 		{
@@ -236,7 +236,7 @@
 				"support.type"
 			],
 			"settings": {
-				"foreground": "{color14}"
+				"foreground": "{color6}"
 			}
 		},
 		{
@@ -250,7 +250,7 @@
 				"source.postcss support.type.property-name"
 			],
 			"settings": {
-				"foreground": "{color14}"
+				"foreground": "{color6}"
 			}
 		},
 		{

@@ -58,5 +58,10 @@
             "Music",
             "projects"
         ]
+    },
+    "style":{
+        "font-size": "16px",
+        "font-family": "ArimoNerdFont",
+        "border-radius": "6px"
     }
 }
