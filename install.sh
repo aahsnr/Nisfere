@@ -115,8 +115,15 @@ setup_icons_and_cursor() {
 
     if [ ! -d "$icons_dest/Solarized-Deluxe-Iconpack" ]; then
         temp_dir=$(mktemp -d)
-         git clone --branch Solarized-Deluxe-Icons-and-Animated-Cursors --single-branch https://github.com/rtlewis88/rtl88-Themes.git "$temp_dir"
+        git clone --branch Solarized-Deluxe-Icons-and-Animated-Cursors --single-branch https://github.com/rtlewis88/rtl88-Themes.git "$temp_dir"
         cp -r "$temp_dir/Solarized-Deluxe-Iconpack" "$icons_dest/"
+        rm -rf "$temp_dir"
+    fi
+
+    if [ ! -d "$icons_dest/Gruvbox-Plus-Dark" ]; then
+        temp_dir=$(mktemp -d)
+        git clone https://github.com/SylEleuth/gruvbox-plus-icon-pack.git "$temp_dir"
+        cp -r "$temp_dir/Gruvbox-Plus-Dark" "$icons_dest/"
         rm -rf "$temp_dir"
     fi
 
