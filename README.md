@@ -39,7 +39,7 @@ Nisfere is a setup script and dotfiles collection tailored for Arch Linux users.
 ## 🔧 Installation
 
 ```bash
-wget -qO- https://gist.githubusercontent.com/Nisfeight8/62ee7aed6796641cf5a89a6e482a2519/raw/31e37c4bf6062491631c176bd4ece18a910a74b6/install.sh | bash
+wget -qO- https://gist.githubusercontent.com/Nisfeight8/62ee7aed6796641cf5a89a6e482a2519/raw/a7f2b9b251e463cbd901914b550633f79adcdabd/install.sh | bash
 ```
 
 ---
