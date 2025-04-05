@@ -77,6 +77,7 @@ Inside this folder, you can add a subfolder for each custom theme (e.g., `dracul
 
 > 🔁 You can switch themes using the `change-theme.sh` script found in the `~/.nisfere/scripts/` directory.
 
+> The colors are applied to Alacritty, Gtk theme, Bpytop, Hyprland colors, VSCode, Swaylock, Nisfere Panel
 ---
 
 ### 📌 Panel Configuration
