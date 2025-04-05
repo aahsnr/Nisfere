@@ -33,6 +33,7 @@ class Launcher(Window):
 
         self.widgets = {
             "app_launcher": self.app_launcher,
+            "power_menu": self.power_menu,
             "screenshot_menu": self.screenshot_menu,
             "screen_recorder_menu": self.screen_recorder_menu,
             "theme_switcher_menu": self.theme_switcher_menu,
