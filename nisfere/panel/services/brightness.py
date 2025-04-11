@@ -1,6 +1,6 @@
 import os
-from fabric.core import Service, Property, Signal
 from loguru import logger
+from fabric.core import Service, Property, Signal
 from fabric.utils import exec_shell_command_async, monitor_file
 
 
@@ -61,9 +61,9 @@ class Brightness(Service):
         self._max_brigthness_path = f"{self._backlight_path}/{self._device}/max_brightness"
         self._brightness_path = f"{self._backlight_path}/{self._device}/brightness"
 
-        self.screen_monitor = monitor_file(self._brightness_path)
+        self._screen_monitor = monitor_file(self._brightness_path)
 
-        self.screen_monitor.connect(
+        self._screen_monitor.connect(
             "changed", lambda *args: self.changed.emit())
 
     def get_max_brightness(self):

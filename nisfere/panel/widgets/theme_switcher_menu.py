@@ -1,5 +1,3 @@
-import os
-import re
 import gi
 
 gi.require_version("Gtk", "3.0")
@@ -9,63 +7,24 @@ from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.scrolledwindow import ScrolledWindow
 from fabric.widgets.label import Label
-from fabric.utils import exec_shell_command, monitor_file
 
 from shared import Button, ButtonWithIcon
+from services import theme_switcher_service
 from utils.icons import check_circle as apply_icon
 from utils.config import CONFIG
 
 
 class ThemeSwitcherMenu(Box):
-    @staticmethod
-    def get_available_themes():
-        user_themes_dir = CONFIG["user-themes-folder"]
-        deafult_themes_dir = CONFIG["default-themes-folder"]
-        theme_dirs = [user_themes_dir, deafult_themes_dir]
-        themes = []
-        for theme_dir in theme_dirs:
-            if not os.path.exists(theme_dir):  # Skip if directory doesn't exist
-                continue
-            for theme_name in os.listdir(theme_dir):
-                theme_path = os.path.join(theme_dir, theme_name)
-                wallpaper = None
-                colors_file = None
-
-                if os.path.isdir(theme_path):
-                    for file in os.listdir(theme_path):
-                        if file.endswith((".jpg", ".png")):
-                            wallpaper = os.path.join(theme_path, file)
-                        elif file == "colors.sh":
-                            colors_file = os.path.join(theme_path, file)
-
-                    if wallpaper and colors_file:
-                        themes.append(
-                            {
-                                "name": theme_name,
-                                "wallpaper": wallpaper,
-                                "colors": colors_file,
-                            }
-                        )
-
-        return themes
-
-    @staticmethod
-    def parse_colors(file_path):
-        colors = {}
-        with open(file_path, "r") as file:
-            for line in file:
-                match = re.match(r'(\w+)="(#?[A-Fa-f0-9]+)"', line.strip())
-                if match:
-                    name, hex_value = match.groups()
-                    colors[name] = hex_value
-        return colors
 
     def __init__(self, **kwargs):
         super().__init__(name="theme-switcher", style_classes="menu", **kwargs)
 
-        self.current_theme = None
+        self.theme_switcher = theme_switcher_service.build()\
+            .connect("current-theme-changed", lambda *args: self.on_current_theme_changed())\
+            .connect("themes-changed", lambda *args: self.on_themes_changed())\
+            .unwrap()
 
-        self.themes = self.get_available_themes()
+        self.selected_theme = None
 
         self.header = Label(
             name="theme-switcher-menu-header", label="Choose theme", h_align="start"
@@ -94,8 +53,32 @@ class ThemeSwitcherMenu(Box):
 
         self.theme_buttons = {}
 
+        self.add(
+            Box(
+                style_classes="menu-inner",
+                orientation="v",
+                spacing=14,
+                children=[
+                    self.header,
+                    self.scrolled_window,
+                    self.color_preview,
+                    self.apply_theme_button,
+                ],
+            )
+        )
+        
+        self.on_themes_changed()
+
+        self.on_current_theme_changed()
+
+    def on_themes_changed(self):
+        self.theme_buttons = {}
+
+        for child in self.buttons_box.get_children():
+            self.buttons_box.remove(child)
+
         row, col = 0, 0
-        for theme in self.themes:
+        for theme in self.theme_switcher.themes:
             theme_box = Box(
                 name="theme-switcher-menu-theme",
                 spacing=3,
@@ -126,41 +109,8 @@ class ThemeSwitcherMenu(Box):
                 col = 0
                 row += 1
 
-        self.add(
-            Box(
-                style_classes="menu-inner",
-                orientation="v",
-                spacing=14,
-                children=[
-                    self.header,
-                    self.scrolled_window,
-                    self.color_preview,
-                    self.apply_theme_button,
-                ],
-            )
-        )
-        self.current_theme_file = monitor_file(CONFIG["theme-current-path"])
-        self.current_theme_file.connect(
-            "changed", lambda *args: self.get_current_theme()
-        )
-        self.get_current_theme()
-
-        self.on_theme_selected(self.current_theme)
-
-    def get_current_theme(self):
-        current_theme_file = CONFIG["theme-current-path"]
-
-        with open(current_theme_file, "r") as f:
-            current_theme = f.read().strip()
-
-        for theme in self.themes:
-            if theme["name"] == current_theme.strip():
-                self.current_theme = theme
-
-        self.apply_active_class_to_current_theme()
-
-    def apply_active_class_to_current_theme(self):
-        current_theme_name = self.current_theme.get(
+    def on_current_theme_changed(self):
+        current_theme_name = self.theme_switcher.current_theme.get(
             "name"
         )  # safely get the current theme name
 
@@ -172,15 +122,14 @@ class ThemeSwitcherMenu(Box):
 
         # Then, apply the 'active' class to the button for the current theme
         if current_theme_name in self.theme_buttons:
-            self.theme_buttons[current_theme_name].add_style_class("active")
+            self.theme_buttons[current_theme_name].add_style_class("active")        
+        
+        self.on_theme_selected(self.theme_switcher.current_theme)
 
-    def apply_theme(self):
-        script_path = CONFIG["nisfere-scripts-path"]
-        output = exec_shell_command(f"{script_path}/change-theme.sh {self.current_theme['name']}")
 
     def on_theme_selected(self, theme):
-        self.current_theme = theme
-        colors = self.parse_colors(theme["colors"])
+        self.selected_theme = theme
+        colors = self.theme_switcher.parse_colors(theme["colors"])
 
         for child in self.color_preview.get_children():
             self.color_preview.remove(child)
@@ -216,3 +165,7 @@ class ThemeSwitcherMenu(Box):
             if col >= columns:
                 col = 0
                 row += 1
+
+    def apply_theme(self):
+        if self.selected_theme:
+            self.theme_switcher.current_theme = self.selected_theme['name']

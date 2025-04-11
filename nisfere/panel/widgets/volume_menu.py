@@ -10,95 +10,76 @@ from services import audio_service
 class VolumeMenu(Box):
     def __init__(self, **kwargs):
         super().__init__(name="volume-menu", style_classes="menu", **kwargs)
+        
+        # Header
+        self.header = Label(name="volume-menu-header", label="Volume", h_align="start")
 
+        # Containers for conditional UI
+        self.dynamic_container = Box(
+            name="volume-menu-body",
+            style_classes="menu-inner",
+            spacing=14,
+            orientation="v",
+            children=[self.header]
+        )
+
+        self.add(self.dynamic_container)
+
+        # Pre-define but don't add these yet
+        self.speaker_box = None
+        self.microphone_box = None
+
+        # Connect to audio events
         self.audio = audio_service.build()\
             .connect("speaker_changed", lambda *args:  self.on_speaker_changed())\
             .connect("microphone_changed", lambda *args:  self.on_microphone_changed())\
             .unwrap()
 
-        self.header = Label(name="volume-menu-header",
-                            label="Volume", h_align="start")
 
-        # Speaker volume
-        self.speaker_box = Box(name="speaker-box", orientation="v")
+    def build_speaker_box(self):
+        label = Label(name="speaker-box-label")
+        mute_btn = Button(name="speaker-mute-btn", on_clicked=lambda *args: self.toggle_speaker_mute(), h_expand=False)
+        scale = Scale(name="speaker-scale", style_classes="scale", min_value=0, max_value=100, value=50, h_expand=True)
+        vol_label = Label(name="speaker-volume-label", label="", h_align="end")
 
-        self.speaker_label = Label(name="speaker-box-label")
+        scale.connect("value-changed", self.on_speaker_scale_changed)
 
-        self.speaker_mgmt_box = Box(
-            name="speaker-mgmt-box", spacing=12, size=25)
+        mgmt_box = Box(name="speaker-mgmt-box", spacing=12, size=25, children=[mute_btn, scale, vol_label])
+        box = Box(name="speaker-box", orientation="v", children=[label, mgmt_box])
 
-        self.speaker_mute_btn = Button(
-            name="speaker-mute-btn", on_clicked=lambda *args: self.toggle_speaker_mute(), h_expand=False)
+        self.speaker_label = label
+        self.speaker_mute_btn = mute_btn
+        self.speaker_scale = scale
+        self.speaker_volume_label = vol_label
 
-        self.speaker_scale = Scale(name="speaker-scale", style_classes="scale",
-                                   min_value=0, max_value=100, value=50, h_expand=True)
+        return box
 
-        self.speaker_volume_label = Label(
-            name="speaker-volume-label", label="", h_align="end")
+    def build_microphone_box(self):
+        label = Label(name="microphone-box-label")
+        mute_btn = Button(name="microphone-mute-btn", on_clicked=lambda *args: self.toggle_microphone_mute(), h_expand=False)
+        scale = Scale(name="microphone-scale", style_classes="scale", min_value=0, max_value=100, value=50, h_expand=True)
+        vol_label = Label(name="microphone-volume-label", label="", h_align="end")
 
-        self.speaker_mgmt_box.children = [
-            self.speaker_mute_btn,
-            self.speaker_scale,
-            self.speaker_volume_label
-        ]
+        scale.connect("value-changed", self.on_microphone_scale_changed)
 
-        self.speaker_box.children = [
-            self.speaker_label,
-            self.speaker_mgmt_box
-        ]
+        mgmt_box = Box(name="microphone-mgmt-box", spacing=12, size=25, children=[mute_btn, scale, vol_label])
+        box = Box(name="microphone-box", orientation="v", children=[label, mgmt_box])
 
-        # Microphone volume
+        self.microphone_label = label
+        self.microphone_mute_btn = mute_btn
+        self.microphone_scale = scale
+        self.microphone_volume_label = vol_label
 
-        self.microphone_box = Box(name="microphone-box", orientation="v")
+        return box
 
-        self.microphone_label = Label(name="microphone-box-label")
-
-        self.microphone_mgmt_box = Box(
-            name="microphone-mgmt-box", spacing=12, size=25)
-
-        self.microphone_mute_btn = Button(
-            name="microphone-mute-btn", on_clicked=lambda *args: self.toggle_microphone_mute(), h_expand=False)
-
-        self.microphone_scale = Scale(
-            name="microphone-scale", style_classes="scale", min_value=0, max_value=100, value=50, h_expand=True)
-
-        self.microphone_volume_label = Label(
-            name="microphone-volume-label", label="", h_align="end")
-
-        self.microphone_mgmt_box.children = [
-            self.microphone_mute_btn,
-            self.microphone_scale,
-            self.microphone_volume_label
-        ]
-
-        self.microphone_box.children = [
-            self.microphone_label,
-            self.microphone_mgmt_box
-        ]
-
-        self.speaker_scale.connect(
-            "value-changed", self.on_speaker_scale_changed)
-
-        self.microphone_scale.connect(
-            "value-changed", self.on_microphone_scale_changed)
-
-        self.add(
-            Box(
-                name="volume-menu-body",
-                style_classes="menu-inner",
-                spacing=14,
-                orientation="v",
-                children=[
-                    self.header,
-                    self.speaker_box,
-                    self.microphone_box
-                ]
-            )
-        )
 
     def on_speaker_changed(self):
         if not self.audio.speaker:
             return
+
+        if not self.speaker_box:
+            self.speaker_box = self.build_speaker_box()
+            self.dynamic_container.add(self.speaker_box)
 
         self.speaker_label.set_label(self.audio.speaker.name[:20])
 
@@ -127,6 +108,10 @@ class VolumeMenu(Box):
     def on_microphone_changed(self):
         if not self.audio.microphone:
             return
+
+        if not self.microphone_box:
+            self.microphone_box = self.build_microphone_box()
+            self.dynamic_container.add(self.microphone_box)
 
         self.microphone_label.set_label(self.audio.microphone.name[:20])
 

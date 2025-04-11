@@ -7,6 +7,7 @@ from services.screen_recorder import ScreenRecorder
 from services.network_manager import NetworkClient, Wifi, Ethernet, AccessPoint
 from services.battery import Battery
 from services.brightness import Brightness
+from services.theme_switcher import ThemeSwitcher
 from fabric.audio import Audio
 from fabric.bluetooth import BluetoothClient
 
@@ -29,3 +30,5 @@ battery_service = Battery()
 brightness_service = Brightness()
 
 bluetooth_service = BluetoothClient()
+
+theme_switcher_service = ThemeSwitcher()
