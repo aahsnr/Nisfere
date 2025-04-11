@@ -17,7 +17,9 @@ class Launcher(Window):
             **kwargs,
         )
 
-        self.power_menu = PowerMenu()
+        self.power_menu = PowerMenu().build()\
+            .connect('closed', lambda *args: self.close())\
+            .unwrap()
         self.app_launcher = AppLauncher().build()\
             .connect('closed', lambda *args: self.close())\
             .unwrap()
@@ -28,7 +30,9 @@ class Launcher(Window):
             .connect('closed', lambda *args: self.close())\
             .unwrap()
 
-        self.theme_switcher_menu = ThemeSwitcherMenu()
+        self.theme_switcher_menu = ThemeSwitcherMenu().build()\
+            .connect('closed', lambda *args: self.close())\
+            .unwrap()
 
 
         self.widgets = {

@@ -7,14 +7,19 @@ from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.scrolledwindow import ScrolledWindow
 from fabric.widgets.label import Label
+from fabric.core import Signal
 
 from shared import Button, ButtonWithIcon
 from services import theme_switcher_service
 from utils.icons import check_circle as apply_icon
 from utils.config import CONFIG
+from utils.icons import close as close_icon
 
 
 class ThemeSwitcherMenu(Box):
+
+    @Signal
+    def closed(self) -> None: ...
 
     def __init__(self, **kwargs):
         super().__init__(name="theme-switcher", style_classes="menu", **kwargs)
@@ -27,7 +32,15 @@ class ThemeSwitcherMenu(Box):
         self.selected_theme = None
 
         self.header = Label(
-            name="theme-switcher-menu-header", label="Choose theme", h_align="start"
+            name="theme-switcher-menu-header", label="Choose theme", h_align="start", h_expand= True
+        )
+
+        self.close_button = Button(
+            name="theme-switcher-menu-close",
+            label=close_icon,
+            v_expand=True,
+            h_align="end",
+            on_clicked=lambda *args: self.emit("closed"),
         )
 
         self.buttons_box = Gtk.Grid(
@@ -59,7 +72,14 @@ class ThemeSwitcherMenu(Box):
                 orientation="v",
                 spacing=14,
                 children=[
-                    self.header,
+                    Box(
+
+                        spacing=14,
+                        children= [
+                            self.header,
+                            self.close_button
+                        ]
+                    ),
                     self.scrolled_window,
                     self.color_preview,
                     self.apply_theme_button,

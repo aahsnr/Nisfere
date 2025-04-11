@@ -2,6 +2,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 
 from fabric.utils.helpers import exec_shell_command
+from fabric.core import Signal
 
 from shared import Button
 from utils.config import CONFIG
@@ -12,6 +13,9 @@ from fabricators.uptime_fabricator import uptime_fabricator
 power_buttons = CONFIG.get('power-buttons')
 
 class PowerMenu(Box):
+    @Signal
+    def closed(self) -> None: ...
+
     def __init__(self, **kwargs):
         super().__init__(name= "power-menu", style_classes= "menu", **kwargs)
 
@@ -48,6 +52,7 @@ class PowerMenu(Box):
             
     def exec_button_command(self, command):
         exec_shell_command(command)
-    
+        self.emit("closed")
+
     def on_uptime_value_changed(self, uptime_value):
         self.footer.set_label(uptime_value)

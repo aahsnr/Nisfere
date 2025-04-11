@@ -1,4 +1,6 @@
 #theme-switcher-menu-header {
+    background-color: var(--window-bg);
+    padding: 5px;
     color: var(--selected);
     font-weight: bold;
 }
@@ -33,4 +35,13 @@
 
 #theme-switcher-menu-color-name-label{
     font-size: 14px;
+}
+#theme-switcher-menu-close{
+    background-color: var(--window-bg);
+    padding: 5px;
+}
+
+#theme-switcher-menu-close label{
+    color: var(--color1);
+    font-size: 20px;
 }

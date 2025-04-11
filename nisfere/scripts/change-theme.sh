@@ -99,10 +99,13 @@ done
 
 if [[ -f "$HYPRLAND_TEMPLATE_FILE" ]]; then
   sed "${hyprland_sed_cmd[@]}" "$HYPRLAND_TEMPLATE_FILE" > "$HYPRLAND_CONFIG_FILE"
+  # Reload Hyprland
+  hyprctl reload
   echo "✅ Colors applied to Hyprland!"
 else
   echo "⚠️ Warning: Hyprland template file not found!"
 fi
+
 
 # Apply GTK and icon theme
 gsettings set org.gnome.desktop.interface gtk-theme "nisfere-gtk-theme"
@@ -115,6 +118,3 @@ echo "✅ Wallpaper applied!"
 
 # Update current theme file
 echo "$NEW_THEME" > "$CURRENT_THEME_FILE"
-
-# Reload Hyprland
-hyprctl reload
