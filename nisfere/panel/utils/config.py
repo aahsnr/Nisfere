@@ -53,7 +53,7 @@ CONFIG = {
             "name": "logout",
             "icon": power_menu_icons["logout"],
             "label": "Logout",
-            "command": "logout",
+            "command": "hyprctl dispatch exit",
         },
         {
             "name": "suspend",
