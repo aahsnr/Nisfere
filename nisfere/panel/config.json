@@ -17,9 +17,11 @@
                 "media_player"
             ],
             "right": [
+                "brightness",
                 "volume",
                 "date_time",
                 "language",
+                "battery",
                 "system_tray",
                 "power"
             ]

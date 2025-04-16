@@ -43,9 +43,10 @@ if __name__ == "__main__":
 
     notifications = Notifications()
 
-    dock = Dock()
-
-    windows = [bar, notifications, dock]
+    windows = [bar, notifications, launcher]
+    
+    if fabric_config['dock']['use']:
+        windows.append(Dock())
 
     # Initialize the application with the status bar
     app = Application("nisfere-panel", windows=windows)
