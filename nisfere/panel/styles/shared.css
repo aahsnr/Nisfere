@@ -85,3 +85,21 @@ tooltip>* {
 tooltip>box>label{
     font-size: 12px;
 }
+
+#dock-popup-close label{
+    color: var(--color1);
+    font-size: 20px;
+}
+
+#dock-list-button{
+    padding: 5px;
+    background-color: var(--window-bg);
+}
+#dock-list-button:hover{
+    background-color: var(--selected);
+}
+
+#dock-list-button:hover label{
+    color: var(--window-bg);
+
+}

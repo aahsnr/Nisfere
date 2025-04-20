@@ -17,7 +17,7 @@
 }
 
 #theme-switcher-menu-apply-button {
-    padding: 5px;
+    padding: 8px;
     background-color: var(--window-bg);
 }
 
@@ -25,6 +25,10 @@
     background-color: var(--selected);
 }
 
+#theme-switcher-menu-apply-button:hover label{
+    color: var(--window-bg);
+
+}
 #theme-switcher-menu-color-box {
     border: 1px solid var(--foreground);
 }
