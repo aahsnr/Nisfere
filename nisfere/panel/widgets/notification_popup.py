@@ -23,8 +23,9 @@ class NotificationWidget(Box):
         )
 
         self.notification = notification
+        self.use_cache = use_cache
 
-        if use_cache:
+        if self.use_cache:
             self.notification.connect(
                 "removed-from-cache", lambda *args: self.close())
         else:
@@ -60,7 +61,7 @@ class NotificationWidget(Box):
             ]
         )
 
-        if self.notification.actions and not use_cache:
+        if self.notification.actions:
             actions_box = Box(
                 spacing=8,
                 orientation="h",
@@ -86,7 +87,7 @@ class NotificationWidget(Box):
             v_align="center",
             h_align="end",
             on_clicked=lambda *args: (self.notification.remove_from_cache()
-                                      if use_cache else self.notification.close()),
+                                      if self.use_cache else self.notification.close()),
         )
 
         self.notification_box = Box(
@@ -123,4 +124,4 @@ class NotificationWidget(Box):
 
     def on_action_clicked(self, action):
         action.invoke()
-        self.close()
+        self.notification.remove_from_cache() if self.use_cache else self.notification.close()

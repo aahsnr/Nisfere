@@ -1,13 +1,13 @@
-from loguru import logger
 import time
 import os
 from pydbus import SessionBus
+import threading
+from loguru import logger
 from utils.config import CONFIG
 from utils.helpers import run_command_with_output
 from fabric.utils import invoke_repeater, exec_shell_command_async
 from fabric.core import Service, Property, Signal
 from gi.repository import Gio, GLib, Gtk, Notify
-
 
 class Screenshot(Service):
 
@@ -25,7 +25,7 @@ class Screenshot(Service):
         filename = self._generate_filename()
         command = f"{command} {filename}"
         run_command_with_output(command=command)
-        self.send_notification(file_path=filename)
+        self._send_notification(file_path=filename)
         return False
 
     # Specific functions for each action
@@ -46,44 +46,49 @@ class Screenshot(Service):
         self.screenshot_saved.emit()
         GLib.timeout_add(500, lambda: self._capture('grim -g "$(slurp)"'))
 
-    def send_notification(self, file_path):
-        cmd = ["notify-send"]
-        cmd.extend(
-            [
-                "-A",
-                "files=Show in Files",
-                "-A",
-                "view=View",
-                "-A",
-                "edit=Edit",
-                "-i",
-                "camera-photo-symbolic",
-                "-a",
-                "Fabric Screenshot Utility",
-                "-h",
-                f"STRING:image-path:{file_path}",
-                "Screenshot Saved",
-                f"Saved Screenshot at {file_path}",
-            ]
-        )
-
-        proc: Gio.Subprocess = Gio.Subprocess.new(cmd, Gio.SubprocessFlags.STDOUT_PIPE)
-
-        def do_callback(process: Gio.Subprocess, task: Gio.Task):
+    # Inside your class...
+    def _send_notification(self, file_path):
+        def notify():
             try:
-                _, stdout, stderr = process.communicate_utf8_finish(task)
-            except Exception:
-                logger.error(
-                    f"[SCREENSHOT] Failed read notification action with error {stderr}"
+                bus = SessionBus()
+                notifications = bus.get("org.freedesktop.Notifications", "/org/freedesktop/Notifications")
+
+                actions = [
+                    "files", "Show in Files",
+                    "view", "View",
+                    "edit", "Edit"
+                ]
+
+                hints = {
+                    "urgency": GLib.Variant("y", 1),  # Use y (byte) for urgency
+                    # "image-path": GLib.Variant("s", file_path)  # You can add image if needed
+                }
+
+                notification_id = notifications.Notify(
+                    "Nisfere",
+                    0,
+                    "camera-photo-symbolic",
+                    "Screenshot Saved",
+                    f"Saved screenshot at {file_path}",
+                    actions,
+                    hints,
+                    3000
                 )
-                return
 
-            match stdout.strip("\n"):
-                case "files":
-                    exec_shell_command_async(f"xdg-open {self._screenshots_folder}")
-                case "view":
-                    exec_shell_command_async(f"xdg-open {file_path}")
-                case "edit":
-                    exec_shell_command_async(f"swappy -f {file_path}")
+                # pydbus allows connecting to signals too
+                def on_action_invoked(id, key):
+                    logger.info(f"Notification action: {key}")
+                    if key == "files":
+                        exec_shell_command_async(f"xdg-open {self._screenshots_folder}")
+                    elif key == "view":
+                        exec_shell_command_async(f"xdg-open {file_path}")
+                    elif key == "edit":
+                        exec_shell_command_async(f"swappy -f {file_path}")
 
-        proc.communicate_utf8_async(None, None, do_callback)
+                # Connect the ActionInvoked signal
+                notifications.onActionInvoked = on_action_invoked
+
+            except Exception as e:
+                logger.error(f"[SCREENSHOT] Failed to send notification: {e}")
+
+        threading.Thread(target=notify, daemon=True).start()

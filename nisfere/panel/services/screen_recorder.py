@@ -1,11 +1,13 @@
-from loguru import logger
 import time
 import os
+import threading
+from loguru import logger
+from pydbus import SessionBus
 from utils.config import CONFIG
 from utils.helpers import run_command_with_output
 from fabric.utils import exec_shell_command, exec_shell_command_async
 from fabric.core import Service, Property, Signal
-from gi.repository import GLib, Gio
+from gi.repository import GLib
 
 
 class ScreenRecorder(Service):
@@ -32,7 +34,7 @@ class ScreenRecorder(Service):
         self._filename = self._generate_filename()
 
         area = "" if fullscreen else f'-g "$(slurp)"'
-        command = f"wf-recorder --file={self._filename} --pixel-format yuv420p {area}"
+        command = f"wf-recorder --audio --file={self._filename} --pixel-format yuv420p {area}"
 
         GLib.timeout_add(
             500,
@@ -47,38 +49,49 @@ class ScreenRecorder(Service):
         self._is_recording = False
         self.notify("is_recording")
         run_command_with_output("pkill -INT wf-recorder", expect_output=False)
-        self.send_notification()
+        self._send_notification()
 
-    def send_notification(self):
-        cmd = ["notify-send"]
-        cmd.extend(
-            [
-                "-A",
-                "files=Show in Files",
-                "-A",
-                "view=View",
-                "-a",
-                "Fabric Screenshot Utility",
-                "Screen record Saved",
-                f"Saved Screen record at {self._records_folder}",
-            ]
-        )
-
-        proc: Gio.Subprocess = Gio.Subprocess.new(cmd, Gio.SubprocessFlags.STDOUT_PIPE)
-
-        def do_callback(process: Gio.Subprocess, task: Gio.Task):
+    def _send_notification(self):
+        def notify():
             try:
-                _, stdout, stderr = process.communicate_utf8_finish(task)
-            except Exception:
-                logger.error(
-                    f"[SCREEN RECORDER] Failed read notification action with error {stderr}"
+                # Use pydbus to get the session bus and the Notifications object
+                bus = SessionBus()
+                notifications = bus.get("org.freedesktop.Notifications", "/org/freedesktop/Notifications")
+
+                actions = [
+                    "files", "Show in Files",
+                    "view", "View",
+                ]
+
+                hints = {
+                    "urgency": GLib.Variant("y", 1),  # Use byte type for urgency
+                }
+
+                # Send the notification to the D-Bus
+                notification_id = notifications.Notify(
+                    "Nisfere",
+                    0,
+                    "camera-photo-symbolic",
+                    "Screen Record Saved",
+                    f"Saved screen record at {self._filename}",
+                    actions,
+                    hints,
+                    3000  # Timeout in milliseconds
                 )
-                return
 
-            match stdout.strip("\n"):
-                case "files":
-                    exec_shell_command_async(f"xdg-open {self._records_folder}")
-                case "view":
-                    exec_shell_command_async(f"xdg-open {self._filename}")
+                # Define callback for the action invoked signal
+                def on_action_invoked(id, key):
+                    logger.info(f"Notification action: {key}")
+                    if key == "files":
+                        exec_shell_command_async(f"xdg-open {self._records_folder}")
+                    elif key == "view":
+                        exec_shell_command_async(f"xdg-open {self._filename}")
 
-        proc.communicate_utf8_async(None, None, do_callback)
+                # Assign the callback to the ActionInvoked signal
+                notifications.onActionInvoked = on_action_invoked
+
+            except Exception as e:
+                logger.error(f"[SCREEN RECORDER] Failed to send notification: {e}")
+
+        # Run the notification in a separate thread to avoid blocking
+        GLib.timeout_add(0, lambda: threading.Thread(target=notify, daemon=True).start())
