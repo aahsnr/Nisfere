@@ -121,6 +121,9 @@ copy_files() {
     cp -r "$script_dir/gtk-themes/"* "$HOME/.themes/"
     cp -r "$script_dir/dotfiles/"* "$HOME/.config/"
     echo '[]' > "$HOME/.cache/nisfere/notifications.json"
+
+    mkdir -p "$HOME/Videos/records"
+    mkdir -p "$HOME/Pictures/screenshots"
     
     mkdir -p "$HOME/.config/nisfere/themes"
     cp "$script_dir/nisfere/panel/config.json" "$HOME/.config/nisfere/panel-config.json"
