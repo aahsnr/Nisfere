@@ -70,10 +70,7 @@ install_packages() {
   echo -e "${blue}Installing required packages...${reset}"
 
   # Install packages from official repositories
-  sudo dnf install -y fastfetch btop pipewire playerctl NetworkManager brightnessctl pkgconf wf-recorder thunar thunar-archive-plugin xarchiver zip unzip gvfs swww zsh kitty libnotify python3 gtk3-devel cairo-devel gtk-layer-shell-devel libgirepository1.0-dev gobject-introspection-devel python3-pip python3-gobject qt6ct-kde python3-psutil python3-cairo python3-dbus python3-loguru grim swappy hyprland zen-browser eza yazi viu protonplus quickshell
-
-  # Install Python packages
-  pip3 install --user fabric swaylock-effects swayidle gnome-bluetooth slurp
+  sudo dnf install -y fastfetch btop pipewire playerctl NetworkManager brightnessctl pkgconf wf-recorder thunar thunar-archive-plugin xarchiver zip unzip gvfs swww zsh kitty libnotify python3 gtk3-devel cairo-devel gtk-layer-shell-devel libgirepository1.0-dev gobject-introspection-devel python3-pip python3-gobject qt6ct-kde python3-psutil python3-cairo python3-dbus python3-loguru grim swappy hyprland zen-browser protonplus gnome-bluetooth slurp
 
   echo -e "${green}✔ Packages installed.${reset}"
 }
@@ -81,14 +78,14 @@ install_packages() {
 copy_files() {
   echo -e "${blue}Copying configuration files...${reset}"
 
-  # Create necessary directories
-  mkdir -p "$HOME/.fonts" "$HOME/.themes" "$HOME/.icons" "$HOME/.config" "$HOME/.cache/nisfere" "$HOME/.vscode/extensions/"
-
-  # Copy files if they exist
-  [ -d "$script_dir/fonts/" ] && cp -r "$script_dir/fonts/"* "$HOME/.fonts/"
-  [ -d "$script_dir/gtk-themes/" ] && cp -r "$script_dir/gtk-themes/"* "$HOME/.themes/"
-  [ -d "$script_dir/dotfiles/" ] && cp -r "$script_dir/dotfiles/"* "$HOME/.config/"
-
+  # Using home-manager to source all dotfiles
+  # mkdir -p "$HOME/.fonts" "$HOME/.themes" "$HOME/.icons" "$HOME/.config" "$HOME/.cache/nisfere" "$HOME/.vscode/extensions/"
+  #
+  # # Copy files if they exist
+  # [ -d "$script_dir/fonts/" ] && cp -r "$script_dir/fonts/"* "$HOME/.fonts/"
+  # [ -d "$script_dir/gtk-themes/" ] && cp -r "$script_dir/gtk-themes/"* "$HOME/.themes/"
+  # [ -d "$script_dir/dotfiles/" ] && cp -r "$script_dir/dotfiles/"* "$HOME/.config/"
+  #
   # Create notifications cache file
   echo '[]' >"$HOME/.cache/nisfere/notifications.json"
 
