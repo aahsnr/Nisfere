@@ -15,31 +15,15 @@ print_banner() {
     echo -e "${blue}  N   N  I  SSS   F     EEEEE R   R EEEEE${reset}"
 }
 
-abort_if_not_arch() {
-    if ! grep -q "arch" /etc/os-release; then
-        echo "This script is designed to run on Arch Linux. Exiting."
-        exit 1
-    fi
-}
-
-abort_if_root() {
-    if [ "$(id -u)" -eq 0 ]; then
-        echo "Please do not run this script as root. Exiting."
+abort_if_not_fedora() {
+    if ! grep -q "fedora" /etc/os-release; then
+        echo "This script is designed to run on Fedora Linux. Exiting."
         exit 1
     fi
 }
 
 check_command() {
     command -v "$1" &>/dev/null
-}
-
-install_yay() {
-    echo "Installing yay..."
-    git clone https://aur.archlinux.org/yay.git "$nisfere_installation_folder/yay"
-    cd "$nisfere_installation_folder/yay"
-    makepkg -si --noconfirm
-    cd - &>/dev/null
-    echo -e "${green}✔ Yay installed successfully.${reset}"
 }
 
 install_packages() {
